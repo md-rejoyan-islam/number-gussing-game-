@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="container xl:w-[1100px] mx-auto mt-6">
+        <h1 class="text-2xl font-semibold text-center">Number guessing game</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container xl:w-[1100px] mx-auto">
+        <div
+          class="overflow-hidden card max-w-[500px] mx-auto border border-zinc-200 my-5 p-4 rounded-md"
+        >
+          <form>
+            <div class="my-3 flex items-center gap-4">
+              <label for="number" class="block w-full"
+                >Enter lower Range :
+              </label>
+              <input
+                type="number"
+                id="lower-number"
+                placeholder="Enter lower number"
+                class="focus:outline-none focus:ring-4 focus:ring-sky-100 flex-1 border border-gray-200 rounded-md p-2"
+              />
+            </div>
+            <div class="my-3 flex items-center gap-4">
+              <label for="number" class="block w-full"
+                >Enter Higher Range :
+              </label>
+              <input
+                type="number"
+                id="higher-number"
+                placeholder="Enter Higher number"
+                class="focus:outline-none focus:ring-4 focus:ring-sky-100 flex-1 border border-gray-200 rounded-md p-2"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="start">
+          <button
+            class="w-[100px] rounded-full h-[100px] bg-green-600 text-2xl font-semibold mx-auto block text-white"
+            id="start-btn"
+          >
+            Start
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- error modal  -->
+    <div class="modal fixed top-0 w-full px-4 hidden" id="error-popup">
+      <div class="modal-content w-fit mx-auto my-4">
+        <p
+          class="py-2 bg-red-400 text-white px-4 rounded-md flex gap-2 items-center"
+          id="error-message"
+        ></p>
+      </div>
+    </div>
+
+    <!-- modal for form  -->
+    <!-- <div
+      class="modal h-screen fixed top-0 w-full bg-[#333] px-4"
+      style="background-color: rgba(202, 206, 206, 0.637)"
+    >
+      <div class="modal-content w-fit mx-auto my-4">
+        <p class="bg-white py-2 px-4 rounded-md">Lower number is require!</p>
+      </div>
+    </div> -->
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
