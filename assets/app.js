@@ -13,7 +13,7 @@ const modal = document.querySelector("#modal");
 const guessNumberArray = [];
 const correctNumber = [];
 
-// starting value
+// input value
 let lowerValue;
 let highValue;
 
@@ -22,8 +22,12 @@ startBtn.addEventListener("click", () => {
   // before all data clear
   guessNumberArray.length = 0;
   correctNumber.length = 0;
+
+  // receive input value
   lowerValue = document.querySelector("#lower-number").value;
   highValue = document.querySelector("#higher-number").value;
+
+  // input field value validation
   if (!lowerValue) return errorPopupShow("Please enter a lower value");
   if (!highValue) return errorPopupShow("Please enter a higher value");
 
@@ -49,50 +53,61 @@ function errorPopupShow(message) {
   }, 3000);
 }
 
-// value receive from modal
+// modal event listener for submit button
 modal.addEventListener("click", function (e) {
+  // submit button event listener
   if (e.target.id === "guessBtn") {
     const guessValue =
       e.target.parentElement.parentElement.querySelector("#guessNumber").value;
 
+    // guess value validation
     if (guessValue < lowerValue || guessValue > highValue)
       return errorPopupShow(
         `Please enter a number between ${lowerValue} and ${highValue}`
       );
 
-    // value validation
+    // if guess  field value is empty
     if (!guessValue) return errorPopupShow("Please enter a guess");
 
-    // random number
+    // random number generate between two numbers
     const randomNumber = randomNumBetween(lowerValue, highValue);
 
-    // store guess number
+    // exact number store in array
     if (guessNumberArray.length < 1) {
       correctNumber.push(randomNumber);
     }
 
+    // store guess number in array
     guessNumberArray.push(guessValue);
+
     // if guess number match with exact number
     if (Number(guessValue) === correctNumber[0]) {
-      //off start button
+      // hide start button
       startBtn.classList.add("hidden");
+      // hide start div
+      startDiv.classList.add("hidden");
+      // hide modal
+      modal.classList.add("hidden");
       // show result div
       resultDiv.classList.remove("hidden");
-      startDiv.classList.add("hidden");
-
-      modal.classList.add("hidden");
+      // show result div innerHTML
       resultHTML(true);
       return;
     }
 
+    // loop stop after 3 times
     if (guessNumberArray.length === 3) {
-      //off start button
+      //hide start button
       startBtn.classList.add("hidden");
+      // hide start div
+      startDiv.classList.add("hidden");
+
       // show result div
       resultDiv.classList.remove("hidden");
-      startDiv.classList.add("hidden");
-      resultHTML(false);
 
+      // show result div innerHTML
+      resultHTML(false);
+      // hide modal
       return modal.classList.add("hidden");
     }
     modalInnerHTML(guessNumberArray.length + 1);
@@ -135,11 +150,9 @@ restartBtn.addEventListener("click", () => {
   startDiv.classList.remove("hidden");
   correctNumber.length = 0;
   guessNumberArray.length = 0;
-  //   modal.classList.add("hidden");
 });
 
 // innerHTML add in modal
-
 function modalInnerHTML(turn) {
   modal.innerHTML = `
     <div class="modal-content flex justify-center h-full items-center">
