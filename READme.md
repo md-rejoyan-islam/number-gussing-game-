@@ -13,5 +13,5 @@ To start your game , please provide lower and upper number.
 
 ### Necessary Link
 
-<a href="">Live Preview</a>
+<a href="https://rejoyanislam.github.io/number-gussing-game-/">Live Preview</a>
 <a href="https://github.com/RejoyanIslam/number-gussing-game-">GitHub Link </a>
