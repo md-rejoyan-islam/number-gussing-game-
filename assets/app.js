@@ -2,6 +2,10 @@ const startBtn = document.querySelector("#start-btn");
 
 const restartBtn = document.querySelector("#restart-btn");
 
+const resultDiv = document.querySelector("#result-div");
+
+const startDiv = document.querySelector("#start-div");
+
 // modal
 const modal = document.querySelector("#modal");
 
@@ -49,8 +53,6 @@ function errorPopupShow(message) {
 // innerHTML add in modal
 
 function modalInnerHTML(turn) {
-  const index = Number(turn) - 2;
-  console.log(guessNumberArray, exactNumberArray);
   modal.classList.remove("hidden");
   modal.innerHTML = `
     <div class="modal-content flex justify-center h-full items-center">
@@ -132,6 +134,23 @@ modal.addEventListener("click", function (e) {
     exactNumberArray.push(randomNumber);
 
     if (guessNumberArray.length === 3) {
+      //off start button
+      startBtn.classList.add("hidden");
+      // show result div
+      resultDiv.classList.remove("hidden");
+      startDiv.classList.add("hidden");
+
+      // winner or loser
+      if (
+        guessNumberArray[0] == exactNumberArray[0] &&
+        guessNumberArray[1] == exactNumberArray[1] &&
+        guessNumberArray[2] == exactNumberArray[2]
+      ) {
+        resultHTML(true);
+      } else {
+        resultHTML(false);
+      }
+
       return modal.classList.add("hidden");
     }
     modalInnerHTML(guessNumberArray.length + 1);
@@ -144,3 +163,52 @@ function randomNumBetween(min, max) {
     Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min)
   );
 }
+
+// result div innerHTML
+function resultHTML(result) {
+  restartBtn.classList.remove("hidden");
+
+  resultDiv.innerHTML = `
+    <div class="card">
+            <h2 class="text-2xl text-center font-semibold py-2">Result</h2>
+            <table class="w-full text-center border">
+              <thead class="py-1 border bg-zinc-100 rounded-t-md">
+                <th class="py-1">#</th>
+                <th>Guess Value</th>
+                <th>Exact Value</th>
+              </thead>
+              <tbody>
+                ${guessNumberArray
+                  .map(
+                    (number, index) => `<tr>
+                  <td class="py-2">${index}</td>
+                  <td>${number}</td>
+                  <td>${exactNumberArray[index]}</td>
+                </tr>`
+                  )
+                  .join("")}
+               
+                
+              </tbody>
+            </table>
+            ${
+              result
+                ? `<p class="bg-green-400 text-white my-2 py-2 px-4 rounded-sm">
+              Winner
+            </p>`
+                : `   <p class="bg-red-400 text-white my-2 py-2 px-4 rounded-sm">
+              !!! Game Over !!! Loser !!!
+            </p>`
+            }
+            
+          </div>
+    `;
+}
+
+restartBtn.addEventListener("click", () => {
+  resultDiv.classList.add("hidden");
+  startBtn.classList.remove("hidden");
+  restartBtn.classList.add("hidden");
+  startDiv.classList.remove("hidden");
+  //   modal.classList.add("hidden");
+});
