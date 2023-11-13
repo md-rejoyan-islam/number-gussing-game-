@@ -12,7 +12,8 @@
         <h1 class="text-2xl font-semibold text-center">Number guessing game</h1>
       </div>
     </header>
-    <main>
+    <main class="my-8">
+      <!-- container  -->
       <div class="container xl:w-[1100px] mx-auto">
         <div
           class="overflow-hidden card max-w-[500px] mx-auto border border-zinc-200 my-5 p-4 rounded-md"
@@ -25,6 +26,7 @@
               <input
                 type="number"
                 id="lower-number"
+                min="0"
                 placeholder="Enter lower number"
                 class="focus:outline-none focus:ring-4 focus:ring-sky-100 flex-1 border border-gray-200 rounded-md p-2"
               />
@@ -36,18 +38,70 @@
               <input
                 type="number"
                 id="higher-number"
+                min="0"
                 placeholder="Enter Higher number"
                 class="focus:outline-none focus:ring-4 focus:ring-sky-100 flex-1 border border-gray-200 rounded-md p-2"
               />
             </div>
           </form>
         </div>
+        <!-- start button  -->
         <div class="start">
           <button
             class="w-[100px] rounded-full h-[100px] bg-green-600 text-2xl font-semibold mx-auto block text-white"
             id="start-btn"
           >
             Start
+          </button>
+        </div>
+
+        <!-- result show here  -->
+        <div
+          class="hidden max-w-[500px] mx-auto p-4 pt-2 border rounded-md my-5"
+          id="result-div"
+        >
+          <div class="card">
+            <h2 class="text-2xl text-center font-semibold py-2">Result</h2>
+            <table class="w-full text-center border">
+              <thead class="py-1 border bg-zinc-100 rounded-t-md">
+                <th class="py-1">#</th>
+                <th>Guess Value</th>
+                <th>Exact Value</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="py-2">1</td>
+                  <td>12</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td class="py-2">2</td>
+                  <td>12</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td class="py-2">3</td>
+                  <td>12</td>
+                  <td>10</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="bg-red-400 text-white my-2 py-2 px-4 rounded-sm">
+              !!! Game Over
+            </p>
+            <p class="bg-green-400 text-white my-2 py-2 px-4 rounded-sm">
+              Winner
+            </p>
+          </div>
+        </div>
+
+        <!-- restart start button  -->
+        <div class="restart hidden" id="restart-btn">
+          <button
+            class="w-[100px] rounded-full h-[100px] bg-green-600 text-2xl font-semibold mx-auto block text-white"
+            id="start-btn"
+          >
+            restart
           </button>
         </div>
       </div>
@@ -68,6 +122,49 @@
       class="modal h-screen fixed top-0 w-full bg-[#cacecea2] px-4 hidden"
       id="modal"
     ></div>
+
+    <!-- modal for result  -->
+
+    <div
+      class="hidden modal h-screen fixed top-0 w-full bg-[#cacecea2] px-4"
+      id="result-modal"
+    >
+      <div class="modal-content flex justify-center h-full items-center">
+        <!-- modal body  -->
+        <div class="grow .card bg-white rounded-md max-w-[500px]">
+          <div class="card-container pt-2 bg-zinc-100 rounded-t-md">
+            <h1 class="py-2 font-semibold text-center text-2xl">Result</h1>
+            <hr />
+          </div>
+
+          <div class="card-body p-4">
+            <div class="flex justify-between items-center">
+              <label for="" class="w-full">Enter a guess</label>
+              <input
+                type="number"
+                class="w-full py-2 px-4 focus:outline-none border border-zinc-200 focus:ring-4 focus:ring-sky-100 rounded-md"
+              />
+            </div>
+            <!-- previous guesses  -->
+            <div class="my-5">
+              <h2 class="font-semibold">Previous guesses</h2>
+              <ol class="list-decimal list-inside">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+              </ol>
+            </div>
+            <div class="my-5">
+              <button
+                class="bg-violet-500 hover:bg-violet-600 rounded-md py-2 px-4 text-white w-full font-semibold"
+              >
+                Submit guess
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="./assets/app.js"></script>
   </body>

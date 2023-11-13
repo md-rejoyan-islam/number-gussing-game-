@@ -1,29 +1,36 @@
 const startBtn = document.querySelector("#start-btn");
 
+const restartBtn = document.querySelector("#restart-btn");
+
 // modal
 const modal = document.querySelector("#modal");
 
 // guess number list
 const guessNumberArray = [];
+const exactNumberArray = [];
+
+// starting value
+let lowerValue;
+let highValue;
 
 // start button event listener
 startBtn.addEventListener("click", () => {
-  const lowerValue = document.querySelector("#lower-number").value;
-  const highValue = document.querySelector("#higher-number").value;
+  // before all data clear
+  guessNumberArray.length = 0;
+  exactNumberArray.length = 0;
+
+  lowerValue = document.querySelector("#lower-number").value;
+  highValue = document.querySelector("#higher-number").value;
   if (!lowerValue) return errorPopupShow("Please enter a lower value");
   if (!highValue) return errorPopupShow("Please enter a higher value");
 
-  // modal show
+  // value validation
+  if (Number(lowerValue) >= Number(highValue))
+    return errorPopupShow("Lower value must be less than higher value");
 
+  // modal show
   modal.classList.remove("hidden");
   modalInnerHTML(1);
-  //   customIterator(1).next();
-  //   customIterator(2).next();
-
-  // value receive
-
-  // turn 1
-  //   modalInnerHTML(1,)
 });
 
 // error popup function
@@ -39,14 +46,11 @@ function errorPopupShow(message) {
   }, 3000);
 }
 
-// random number between two numbers
-function randomNumBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 // innerHTML add in modal
 
 function modalInnerHTML(turn) {
+  const index = Number(turn) - 2;
+  console.log(guessNumberArray, exactNumberArray);
   modal.classList.remove("hidden");
   modal.innerHTML = `
     <div class="modal-content flex justify-center h-full items-center">
@@ -68,13 +72,31 @@ function modalInnerHTML(turn) {
             </div>
             <!-- previous guesses  -->
             <div class="my-5">
-              <h2 class="font-semibold">Previous guesses</h2>
-              <ol class="list-decimal list-inside">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-              </ol>
+            ${
+              guessNumberArray.length > 0
+                ? `<p class="text-red-400">${
+                    guessNumberArray[turn - 2] > exactNumberArray[turn - 2]
+                      ? "Last guess was too high!"
+                      : guessNumberArray[turn - 2] < exactNumberArray[turn - 2]
+                      ? "Last guess was too low!"
+                      : "exactly right!"
+                  }</p>`
+                : ""
+            }
             </div>
+            ${
+              guessNumberArray.length > 0
+                ? `<div class="my-5">
+              <h2 class="font-semibold text-[18px]">Previous guesses</h2>
+              <ol class="list-decimal list-inside">
+                ${guessNumberArray
+                  .map((number) => `<li> ${number}</li>`)
+                  .join("")}
+                
+              </ol>
+            </div>`
+                : ""
+            }
             <div class="my-5">
               <button
                 class="bg-violet-500 hover:bg-violet-600 rounded-md py-2 px-4 text-white w-full font-semibold"
@@ -95,10 +117,19 @@ modal.addEventListener("click", function (e) {
     const guessValue =
       e.target.parentElement.parentElement.querySelector("#guessNumber").value;
 
+    if (guessValue < lowerValue || guessValue > highValue)
+      return errorPopupShow(
+        `Please enter a number between ${lowerValue} and ${highValue}`
+      );
+
     // value validation
     if (!guessValue) return errorPopupShow("Please enter a guess");
 
-    guessNumberArray.push(guessValue);
+    // random number
+    const randomNumber = randomNumBetween(lowerValue, highValue);
+
+    guessNumberArray.push(Number(guessValue));
+    exactNumberArray.push(randomNumber);
 
     if (guessNumberArray.length === 3) {
       return modal.classList.add("hidden");
@@ -106,3 +137,10 @@ modal.addEventListener("click", function (e) {
     modalInnerHTML(guessNumberArray.length + 1);
   }
 });
+
+// random number between two numbers
+function randomNumBetween(min, max) {
+  return (
+    Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min)
+  );
+}
