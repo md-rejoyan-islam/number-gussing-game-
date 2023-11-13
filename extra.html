@@ -1,0 +1,35 @@
+<div class="modal-content flex justify-center h-full items-center">
+  <!-- modal body  -->
+  <div class="grow .card bg-white rounded-md max-w-[500px]">
+    <div class="card-container pt-2 bg-zinc-100 rounded-t-md">
+      <h1 class="py-2 font-semibold text-center text-2xl">Turn-1</h1>
+      <hr />
+    </div>
+
+    <div class="card-body p-4">
+      <div class="flex justify-between items-center">
+        <label for="" class="w-full">Enter a guess</label>
+        <input
+          type="number"
+          class="w-full py-2 px-4 focus:outline-none border border-zinc-200 focus:ring-4 focus:ring-sky-100 rounded-md"
+        />
+      </div>
+      <!-- previous guesses  -->
+      <div class="my-5">
+        <h2 class="font-semibold">Previous guesses</h2>
+        <ol class="list-decimal list-inside">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ol>
+      </div>
+      <div class="my-5">
+        <button
+          class="bg-violet-500 hover:bg-violet-600 rounded-md py-2 px-4 text-white w-full font-semibold"
+        >
+          Submit guess
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
