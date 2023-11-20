@@ -46,8 +46,11 @@ startBtn.addEventListener("click", () => {
 
 // error popup function
 function errorPopupShow(message) {
+  // select error and message div
   const errorPopup = document.querySelector("#error-popup");
   const errorMessage = document.querySelector("#error-message");
+
+  //show error popup and message
   errorPopup.classList.remove("hidden");
   errorMessage.textContent = message;
 
