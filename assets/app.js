@@ -60,21 +60,22 @@ function errorPopupShow(message) {
   }, 3000);
 }
 
-// modal event listener for submit button
+// modal event listener for value submit button
 modal.addEventListener("click", function (e) {
   // submit button event listener
   if (e.target.id === "guessBtn") {
+    // select guess number
     const guessValue =
       e.target.parentElement.parentElement.querySelector("#guessNumber").value;
+
+    // if guess  field value is empty
+    if (!guessValue) return errorPopupShow("Please enter a guess");
 
     // guess value validation
     if (guessValue < lowerValue || guessValue > highValue)
       return errorPopupShow(
         `Please enter a number between ${lowerValue} and ${highValue}`
       );
-
-    // if guess  field value is empty
-    if (!guessValue) return errorPopupShow("Please enter a guess");
 
     // random number generate between two numbers
     const randomNumber = randomNumBetween(lowerValue, highValue);
