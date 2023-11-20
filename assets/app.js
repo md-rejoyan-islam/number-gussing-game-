@@ -27,11 +27,11 @@ startBtn.addEventListener("click", () => {
   lowerValue = Number(document.querySelector("#lower-number").value);
   highValue = Number(document.querySelector("#higher-number").value);
 
-  // negative value alert
+  // show negative value alert
   if (lowerValue < 0 || highValue < 0)
     return errorPopupShow("Please enter positive value");
 
-  // input field value validation
+  // empty input field validation
   if (!lowerValue) return errorPopupShow("Please enter a lower value");
   if (!highValue) return errorPopupShow("Please enter a higher value");
 
