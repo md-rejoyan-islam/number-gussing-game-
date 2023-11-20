@@ -1,3 +1,5 @@
+"use strict";
+
 const startBtn = document.querySelector("#start-btn");
 
 const restartBtn = document.querySelector("#restart-btn");
@@ -124,7 +126,7 @@ modal.addEventListener("click", function (e) {
 
 // random number between two numbers
 function randomNumBetween(min, max) {
-  return (
+  return Number(
     Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min)
   );
 }
