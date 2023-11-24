@@ -1,6 +1,6 @@
+//  use strict mode for prevent error
 "use strict";
 
-// query selector
 const startBtn = document.querySelector("#start-btn");
 
 const restartBtn = document.querySelector("#restart-btn");
