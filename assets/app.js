@@ -1,3 +1,4 @@
+//  use strict mode for prevent error
 "use strict";
 
 const startBtn = document.querySelector("#start-btn");
